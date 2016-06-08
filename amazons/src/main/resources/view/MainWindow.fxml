@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.lodz.uni.math.amazons.controller.MainWindowController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="newGame1" mnemonicParsing="false" onAction="#newGame" text="New Game" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadGame" text="Load/Save Game" />
+                  <MenuItem fx:id="close1" mnemonicParsing="false" onAction="#close" text="Close" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text=" Ai">
+            <items>
+                  <MenuItem fx:id="learnAI" mnemonicParsing="false" onAction="#learnAi" text="Learn" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="about" mnemonicParsing="false" onAction="#showAbout" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <HBox fx:id="mainHBox" alignment="CENTER" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

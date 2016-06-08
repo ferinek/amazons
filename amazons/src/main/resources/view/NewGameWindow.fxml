@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.lodz.uni.math.amazons.controller.NewGameWindowController">
+   <top>
+      <Label text="New Game" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+            <Button fx:id="startButton" mnemonicParsing="false" onAction="#startNewGame" text="Start" />
+          <Button mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+        </buttons>
+         <BorderPane.margin>
+            <Insets bottom="10.0" right="20.0" />
+         </BorderPane.margin>
+      </ButtonBar>
+   </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="88.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="17.0" prefWidth="96.0" text="Board Type: " />
+            <Label text="Opponent: " GridPane.rowIndex="1" />
+            <ComboBox fx:id="boardChoice" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="opponentChoice" prefHeight="25.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" right="20.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </center>
+</BorderPane>
