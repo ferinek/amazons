@@ -15,8 +15,8 @@ import pl.lodz.uni.math.amazons.logic.Board;
 public class Ai {
 
     private static final String COLON = ": ";
-    private static final String SHOOT_TO = "Shoot to ?.\n";
-    private static final String MOVE_FROM_TO = "Move from ? to ?. ";
+    private static final String SHOOT_TO = "Shoot to %s.\n";
+    private static final String MOVE_FROM_TO = "Move from %s to %s. ";
     @Autowired
     private Board board;
     @Autowired

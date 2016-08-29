@@ -16,55 +16,62 @@ import pl.lodz.uni.math.amazons.start.AmazonsApplication;
 
 @Configuration
 public class BeanConfig {
-    private static Logger logger = Logger.getLogger(BeanConfig.class);
+	private static final String SAVE_GAME_WINDOW_CREATION_ERROR = "Couldn't create SaveGameWindow bean: ";
+	private static final String NEW_GAME_WINDOW_CREATION_ERROR = "Couldn't create NewGameWindowController bean: ";
+	private static final String MAIN_WINDOW_CREATION_ERROR = "Couldn't create MainWindowController bean: ";
+	private static final String VIEW_SAVE_WINDOW_FXML = "/view/SaveWindow.fxml";
+	private static final String VIEW_NEW_GAME_WINDOW_FXML = "/view/NewGameWindow.fxml";
+	private static final String VIEW_MAIN_WINDOW_FXML = "/view/MainWindow.fxml";
+	private static final Logger LOGGER = Logger.getLogger(BeanConfig.class);
 
-    @Bean
-    public MainWindowController getMainWindowController() {
+	@Bean
+	public MainWindowController getMainWindowController() {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AmazonsApplication.class.getResource("/view/MainWindow.fxml"));
-        try {
-            BorderPane rootLayout = (BorderPane) loader.load();
-            MainWindowController controller = loader.getController();
-            controller.setRootLayout(rootLayout);
-            return controller;
-        } catch (IOException e) {
-            logger.error("Couldn't create MainWindowController bean: " + e);
-        }
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(AmazonsApplication.class.getResource(VIEW_MAIN_WINDOW_FXML));
+		try {
+			BorderPane rootLayout = (BorderPane) loader.load();
+			MainWindowController controller = loader.getController();
+			controller.setRootLayout(rootLayout);
+			return controller;
+		} catch (IOException e) {
+			LOGGER.error(MAIN_WINDOW_CREATION_ERROR, e);
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    @Bean
-    public NewGameWindowController getNewGameController() {
+	@Bean
+	public NewGameWindowController getNewGameController() {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AmazonsApplication.class.getResource("/view/NewGameWindow.fxml"));
-        try {
-            BorderPane rootLayout = (BorderPane) loader.load();
-            NewGameWindowController controller = loader.getController();
-            controller.setRootLayout(rootLayout);
-            return controller;
-        } catch (IOException e) {
-            logger.error("Couldn't create NewGameWindowController bean: " + e);
-           
-        }
-        return null;
-    }
-    @Bean
-    public SaveGameController getSaveGameController() {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(AmazonsApplication.class.getResource(VIEW_NEW_GAME_WINDOW_FXML));
+		try {
+			BorderPane rootLayout = (BorderPane) loader.load();
+			NewGameWindowController controller = loader.getController();
+			controller.setRootLayout(rootLayout);
+			return controller;
+		} catch (IOException e) {
+			LOGGER.error(NEW_GAME_WINDOW_CREATION_ERROR, e);
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AmazonsApplication.class.getResource("/view/SaveWindow.fxml"));
-        try {
-            BorderPane rootLayout = (BorderPane) loader.load();
-            SaveGameController controller = loader.getController();
-            controller.setRootLayout(rootLayout);
-            return controller;
-        } catch (IOException e) {
-            logger.error("Couldn't create SaveGameWindow bean: " + e);
-       
-        }
-        return null;
-    }
+		}
+		return null;
+	}
+
+	@Bean
+	public SaveGameController getSaveGameController() {
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(AmazonsApplication.class.getResource(VIEW_SAVE_WINDOW_FXML));
+		try {
+			BorderPane rootLayout = (BorderPane) loader.load();
+			SaveGameController controller = loader.getController();
+			controller.setRootLayout(rootLayout);
+			return controller;
+		} catch (IOException e) {
+			LOGGER.error(SAVE_GAME_WINDOW_CREATION_ERROR, e);
+
+		}
+		return null;
+	}
 }

@@ -15,39 +15,40 @@ import org.springframework.context.annotation.ComponentScan;
 import pl.lodz.uni.math.amazons.controller.MainWindowController;
 
 @SpringBootApplication
-@ComponentScan({ "pl.lodz.uni.math.amazons.controller", "pl.lodz.uni.math.amazons.database", "pl.lodz.uni.math.amazons.start", "pl.lodz.uni.math.amazons.ai",
-        "pl.lodz.uni.math.amazons.logic", "pl.lodz.uni.math.amazons.config" })
+@ComponentScan({ "pl.lodz.uni.math.amazons.controller", "pl.lodz.uni.math.amazons.database",
+		"pl.lodz.uni.math.amazons.start", "pl.lodz.uni.math.amazons.ai", "pl.lodz.uni.math.amazons.logic",
+		"pl.lodz.uni.math.amazons.config" })
 public class AmazonsApplication extends Application {
-    private Stage primaryStage;
+	private static final String TITLE = "Amazons";
 
-    private static ConfigurableApplicationContext run;
-    
+	private Stage primaryStage;
 
-    public static void main(String[] args) {
-        JFXPanel fxPanel = new JFXPanel();
-        run = SpringApplication.run(AmazonsApplication.class, args);
-        launch(args);
-        run.close();
-    }
+	private static ConfigurableApplicationContext run;
 
-  
-    @Override
-    public void start(Stage pStage) throws Exception {
-        
-        this.primaryStage = pStage;
-        this.primaryStage.setTitle("Amazons");
-        MainWindowController bean = run.getBean(MainWindowController.class);
-        BorderPane rootLayout = bean.getRootLayout();
-        Scene scene = new Scene(rootLayout);
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setMaximized(true);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+	public static void main(String[] args) {
+		JFXPanel fxPanel = new JFXPanel();
+		run = SpringApplication.run(AmazonsApplication.class, args);
+		launch(args);
+		run.close();
+	}
 
-    }
+	@Override
+	public void start(Stage pStage) throws Exception {
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
+		this.primaryStage = pStage;
+		this.primaryStage.setTitle(TITLE);
+		MainWindowController bean = run.getBean(MainWindowController.class);
+		BorderPane rootLayout = bean.getRootLayout();
+		Scene scene = new Scene(rootLayout);
+		primaryStage.setScene(scene);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.setMaximized(true);
+		primaryStage.setResizable(false);
+		primaryStage.show();
+
+	}
+
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
 }

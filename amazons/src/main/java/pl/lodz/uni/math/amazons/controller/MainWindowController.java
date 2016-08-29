@@ -72,7 +72,7 @@ public class MainWindowController implements EventHandler<MouseEvent> {
     }
 
     public void addText(String text, Object... args) {
-        textArea.appendText(StringUtils.printf(text, args));
+        textArea.appendText(String.format(text, args));
     }
 
     public void showAbout() {

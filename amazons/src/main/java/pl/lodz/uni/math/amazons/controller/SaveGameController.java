@@ -17,105 +17,103 @@ import pl.lodz.uni.math.amazons.utils.StyleUtils;
 
 public class SaveGameController {
 
-    @FXML
-    private Button save;
-    @FXML
-    private Button load;
-    @FXML
-    private Button delete;
-    @FXML
-    private ListView<String> listView;
+	@FXML
+	private Button save;
+	@FXML
+	private Button load;
+	@FXML
+	private Button delete;
+	@FXML
+	private ListView<String> listView;
 
-    @Autowired
-    private MainWindowController mainWindowController;
-    @Autowired
-    private SaveService saveService;
+	@Autowired
+	private MainWindowController mainWindowController;
+	@Autowired
+	private SaveService saveService;
 
-    private BorderPane rootLayout;
-    private Stage stage;
+	private BorderPane rootLayout;
+	private Stage stage;
 
-    @FXML
-    private void cancel(ActionEvent event) {
-        closeWindow();
-    }
+	@FXML
+	private void cancel(ActionEvent event) {
+		closeWindow();
+	}
 
-    private void closeWindow() {
-        ((Stage) getRootLayout().getScene().getWindow()).close();
+	private void closeWindow() {
+		((Stage) getRootLayout().getScene().getWindow()).close();
 
-    }
+	}
 
-    @FXML
-    private void delete() {
-        saveService.deleteSave(getSelectedSave());
-        setListView();
-    }
+	@FXML
+	private void delete() {
+		saveService.deleteSave(getSelectedSave());
+		setListView();
+	}
 
-    @FXML
-    private void load() {
-        saveService.loadGame(getSelectedSave());
-        closeWindow();
+	@FXML
+	private void load() {
+		saveService.loadGame(getSelectedSave());
+		closeWindow();
 
-    }
+	}
 
-    @FXML
-    private void save() {
-        boolean saveGame = saveService.saveGame(getSelectedSave(), getSelectedSaveIndex());
-        if (saveGame) {
-            closeWindow();
-        }
-    }
+	@FXML
+	private void save() {
+		boolean saveGame = saveService.saveGame(getSelectedSave(), getSelectedSaveIndex());
+		if (saveGame) {
+			closeWindow();
+		}
+	}
 
-    public void show() {
-        setStage();
-        setSaveButton();
-        setListView();
-        stage.show();
+	public void show() {
+		setStage();
+		setSaveButton();
+		setListView();
+		stage.show();
 
-    }
+	}
 
-    private void setListView() {
-        saveService.setListView(listView);
+	private void setListView() {
+		saveService.setListView(listView);
 
-    }
+	}
 
-    private void setStage() {
-        if (stage == null) {
-            stage = new Stage();
-            rootLayout.setStyle(StyleUtils.BORDER_STYLE);
-            stage.setScene(new Scene(rootLayout));
-            stage.setResizable(false);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(mainWindowController.getRootLayout().getScene().getWindow());
-            saveService.clicked(listView.getSelectionModel().getSelectedIndex(), load);
+	private void setStage() {
+		if (stage == null) {
+			stage = new Stage();
+			rootLayout.setStyle(StyleUtils.BORDER_STYLE);
+			stage.setScene(new Scene(rootLayout));
+			stage.setResizable(false);
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(mainWindowController.getRootLayout().getScene().getWindow());
+			saveService.clicked(listView.getSelectionModel().getSelectedIndex(), load);
+			listView.getSelectionModel().select(0);
+			listView.setOnMouseClicked(event -> {
+				event.consume();
+				saveService.clicked(listView.getSelectionModel().getSelectedIndex(), load);
+			});
+		}
+	}
 
-            listView.getSelectionModel().select(0);
-            listView.setOnMouseClicked(event -> {
-                event.consume();
-                saveService.clicked(listView.getSelectionModel().getSelectedIndex(), load);
+	private void setSaveButton() {
+		saveService.setSaveButton(save);
 
-            });
-        }
-    }
+	}
 
-    private void setSaveButton() {
-        saveService.setSaveButton(save);
+	public BorderPane getRootLayout() {
+		return rootLayout;
+	}
 
-    }
+	public void setRootLayout(BorderPane rootLayout) {
+		this.rootLayout = rootLayout;
+	}
 
-    public BorderPane getRootLayout() {
-        return rootLayout;
-    }
+	private String getSelectedSave() {
+		return listView.getSelectionModel().getSelectedItem();
+	}
 
-    public void setRootLayout(BorderPane rootLayout) {
-        this.rootLayout = rootLayout;
-    }
-
-    private String getSelectedSave() {
-        return listView.getSelectionModel().getSelectedItem();
-    }
-
-    private int getSelectedSaveIndex() {
-        return listView.getSelectionModel().getSelectedIndex();
-    }
+	private int getSelectedSaveIndex() {
+		return listView.getSelectionModel().getSelectedIndex();
+	}
 }
