@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import pl.lodz.uni.math.kslodowicz.amazons.controller.MainWindowController;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.TileDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.PlayerType;
-import pl.lodz.uni.math.kslodowicz.amazons.logic.Board;
+import pl.lodz.uni.math.kslodowicz.amazons.service.BoardService;
 
 @Component
 public class Ai {
@@ -18,7 +18,7 @@ public class Ai {
     private static final String SHOOT_TO = "Shoot to %s.\n";
     private static final String MOVE_FROM_TO = "Move from %s to %s. ";
     @Autowired
-    private Board board;
+    private BoardService board;
     @Autowired
     private MainWindowController controller;
     @Autowired

@@ -1,4 +1,4 @@
-package pl.lodz.uni.math.kslodowicz.amazons.logic;
+package pl.lodz.uni.math.kslodowicz.amazons.service;
 
 import java.util.List;
 import java.util.Random;
@@ -14,9 +14,9 @@ import pl.lodz.uni.math.kslodowicz.amazons.enums.GameType;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.PlayerType;
 
 @Component
-public class Game {
+public class GameService {
 	@Autowired
-	private Board board;
+	private BoardService board;
 	@Autowired
 	private Ai ai;
 	@Autowired
@@ -30,7 +30,7 @@ public class Game {
 	private List<TileDTO> moves;
 	private boolean lockPlayer = false;
 
-	public Game() {
+	public GameService() {
 		super();
 	}
 

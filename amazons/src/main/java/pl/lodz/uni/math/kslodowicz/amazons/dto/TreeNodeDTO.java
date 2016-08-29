@@ -1,11 +1,11 @@
 package pl.lodz.uni.math.kslodowicz.amazons.dto;
 
-import pl.lodz.uni.math.kslodowicz.amazons.logic.Board;
+import pl.lodz.uni.math.kslodowicz.amazons.service.BoardService;
 
 public class TreeNodeDTO {
     private int gameWins;
     private int gamePlayed;
-    private Board board;
+    private BoardService board;
     private TileDTO playerField;
     private TileDTO move;
     private TileDTO shoot;
@@ -27,11 +27,11 @@ public class TreeNodeDTO {
         this.gamePlayed = gamePlayed;
     }
 
-    public Board getBoard() {
+    public BoardService getBoard() {
         return board;
     }
 
-    public void setBoard(Board board) {
+    public void setBoard(BoardService board) {
         this.board = board;
     }
 

@@ -24,7 +24,7 @@ import pl.lodz.uni.math.kslodowicz.amazons.dto.TileDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.GameType;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.OpponentType;
 import pl.lodz.uni.math.kslodowicz.amazons.helper.OrderedImageView;
-import pl.lodz.uni.math.kslodowicz.amazons.logic.Game;
+import pl.lodz.uni.math.kslodowicz.amazons.service.GameService;
 import pl.lodz.uni.math.kslodowicz.amazons.start.AmazonsApplication;
 import pl.lodz.uni.math.kslodowicz.amazons.utils.ArrayUtils;
 import pl.lodz.uni.math.kslodowicz.amazons.utils.StringUtils;
@@ -38,7 +38,7 @@ public class MainWindowController implements EventHandler<MouseEvent> {
     @Autowired
     private NewGameWindowController newGameWindowController;
     @Autowired
-    private Game game;
+    private GameService game;
     @Autowired
     private AmazonsApplication main;
 
@@ -170,11 +170,11 @@ public class MainWindowController implements EventHandler<MouseEvent> {
         }
     }
 
-    public Game getGame() {
+    public GameService getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
+    public void setGame(GameService game) {
         this.game = game;
     }
 

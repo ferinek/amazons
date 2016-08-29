@@ -12,14 +12,14 @@ import pl.lodz.uni.math.kslodowicz.amazons.config.Options;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.TileDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.TreeNodeDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.AiGameResults;
-import pl.lodz.uni.math.kslodowicz.amazons.logic.Board;
+import pl.lodz.uni.math.kslodowicz.amazons.service.BoardService;
 
 @Component
 public class MonteCarloAi {
 	private static final String ERROR_MESSAGE = "Error while joining thread";
 	Logger logger = Logger.getLogger(MonteCarloAi.class);
 	@Autowired
-	private Board board;
+	private BoardService board;
 
 	@Autowired
 	private Options options;
@@ -66,7 +66,7 @@ public class MonteCarloAi {
 	}
 
 	private void setGameResult(TreeNodeDTO dto) {
-		switch (simulateGame(new Board(dto.getBoard()), (this.player % 2) + 1, 0)) {
+		switch (simulateGame(new BoardService(dto.getBoard()), (this.player % 2) + 1, 0)) {
 		case DANGEROUS_LOSS:
 			dto.setDangerous(true);
 			break;
@@ -107,7 +107,7 @@ public class MonteCarloAi {
 		}
 	}
 
-	private AiGameResults simulateGame(Board board, int activePlayer, int count) {
+	private AiGameResults simulateGame(BoardService board, int activePlayer, int count) {
 		if (board.checkIfEnd(activePlayer)) {
 			if (count == 1 && activePlayer == player) {
 				return AiGameResults.DANGEROUS_LOSS;
@@ -133,11 +133,11 @@ public class MonteCarloAi {
 		List<TreeNodeDTO> nodes = new LinkedList<>();
 		for (TileDTO playerField : board.getPlayerFieldsWithMoves(player)) {
 			for (TileDTO possibleMove : board.getPossibleMoves(playerField)) {
-				Board testBoard = new Board(board);
+				BoardService testBoard = new BoardService(board);
 				testBoard.move(playerField, possibleMove);
 				for (TileDTO shot : testBoard.getPossibleMoves(possibleMove)) {
 					TreeNodeDTO node = new TreeNodeDTO();
-					node.setBoard(new Board(testBoard));
+					node.setBoard(new BoardService(testBoard));
 					node.getBoard().shoot(shot);
 					node.setMove(possibleMove);
 					node.setPlayerField(playerField);

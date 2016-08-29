@@ -81,13 +81,13 @@ public class NewGameWindowController {
         }
         boardChoice.setOnAction(event -> {
             event.consume();
-            setOpponentChoices(boardChoice.getSelectionModel().getSelectedItem());
+            setOpponentChoices();
             setupStartButton();
         });
 
     }
 
-    private void setOpponentChoices(GameType gameType) {
+    private void setOpponentChoices() {
         opponentChoice.setValue(OpponentType.TYPE_HUMAN);
         ObservableList<OpponentType> observableArrayList = FXCollections.observableArrayList();
         for (int i = 0; i < OpponentType.values().length - 1; i++)

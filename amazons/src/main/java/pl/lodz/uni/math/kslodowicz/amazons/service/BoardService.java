@@ -1,4 +1,4 @@
-package pl.lodz.uni.math.kslodowicz.amazons.logic;
+package pl.lodz.uni.math.kslodowicz.amazons.service;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,17 +11,17 @@ import pl.lodz.uni.math.kslodowicz.amazons.enums.GameType;
 import pl.lodz.uni.math.kslodowicz.amazons.utils.ArrayUtils;
 
 @Component
-public class Board {
+public class BoardService {
     private int size;
     private int[][] fields;
     private static final int EMPTY_FIELD = 0;
     private static final int ARROW = 3;
 
-    public Board() {
+    public BoardService() {
         super();
     }
 
-    public Board(Board old) {
+    public BoardService(BoardService old) {
         super();
         this.size = old.size;
         this.fields = ArrayUtils.copyTable(old.fields);

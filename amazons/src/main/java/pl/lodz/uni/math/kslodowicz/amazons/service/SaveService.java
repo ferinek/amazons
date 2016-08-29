@@ -16,14 +16,13 @@ import javafx.scene.control.TextInputDialog;
 import pl.lodz.uni.math.kslodowicz.amazons.controller.MainWindowController;
 import pl.lodz.uni.math.kslodowicz.amazons.dao.SaveGameDao;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.SaveGameDTO;
-import pl.lodz.uni.math.kslodowicz.amazons.logic.Game;
 
 @Component
 public class SaveService {
     private static final String NEW_SAVE = "New...";
     private static final String SAVE_DIALOG="Save Dialog";
     @Autowired
-    private Game game;
+    private GameService game;
     @Autowired
     private SaveGameDao saveGameDao;
     @Autowired
