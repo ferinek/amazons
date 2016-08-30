@@ -1,9 +1,14 @@
 package pl.lodz.uni.math.kslodowicz.amazons.config;
 
+import javax.sql.DataSource;
+
 import org.mockito.Mock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import pl.lodz.uni.math.kslodowicz.amazons.controller.MainWindowController;
 import pl.lodz.uni.math.kslodowicz.amazons.controller.NewGameWindowController;
@@ -21,18 +26,24 @@ public class TestConfiguration {
     private SaveGameController saveGameController;
 
     @Bean
-    private MainWindowController getMainWindowController() {
+    public MainWindowController getMainWindowController() {
         return mainWindowController;
     }
 
     @Bean
-    private NewGameWindowController getNewGameWindowController() {
+    public NewGameWindowController getNewGameWindowController() {
         return newWindowController;
     }
 
     @Bean
-    private SaveGameController getSaveGameController() {
+    public SaveGameController getSaveGameController() {
         return saveGameController;
     }
 
+    @Bean()
+    public DataSource createEmbeddedDatabase() {
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.H2).setName("database").build();
+        return db;
+    }
 }
