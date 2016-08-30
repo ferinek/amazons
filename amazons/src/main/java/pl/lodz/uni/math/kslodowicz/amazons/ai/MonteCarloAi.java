@@ -8,11 +8,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pl.lodz.uni.math.kslodowicz.amazons.config.Options;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.TileDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.TreeNodeDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.AiGameResults;
 import pl.lodz.uni.math.kslodowicz.amazons.service.BoardService;
+import pl.lodz.uni.math.kslodowicz.amazons.service.OptionsService;
 
 @Component
 public class MonteCarloAi {
@@ -22,7 +22,7 @@ public class MonteCarloAi {
 	private BoardService board;
 
 	@Autowired
-	private Options options;
+	private OptionsService options;
 	private int player;
 	Random random = new Random();
 

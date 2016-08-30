@@ -14,7 +14,7 @@ import javafx.stage.StageStyle;
 import pl.lodz.uni.math.kslodowicz.amazons.controller.MainWindowController;
 
 @SpringBootApplication
-@ComponentScan( "pl.lodz.uni.math.kslodowicz" )
+@ComponentScan( "pl.lodz.uni.math.kslodowicz.amazons" )
 public class AmazonsApplication extends Application {
 	private static final String TITLE = "Amazons";
 
