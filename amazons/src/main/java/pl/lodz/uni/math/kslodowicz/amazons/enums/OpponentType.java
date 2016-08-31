@@ -3,8 +3,8 @@ package pl.lodz.uni.math.kslodowicz.amazons.enums;
 public enum OpponentType {
     TYPE_CHOOSE(-1, "Please, select Board type first."),
     TYPE_HUMAN(0, "Human Player"),
-    TYPE_AI_WEAK(1, "Weak AI"),
-    TYPE_AI_STRONG(2, "Strong AI");
+    TYPE_AI_WEAK(1, "Easy AI"),
+    TYPE_AI_STRONG(2, "Hard AI");
 
     private int value;
     private String name;

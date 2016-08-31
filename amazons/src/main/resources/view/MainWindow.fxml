@@ -16,9 +16,9 @@
                   <MenuItem fx:id="close1" mnemonicParsing="false" onAction="#close" text="Close" />
                </items>
             </Menu>
-          <Menu mnemonicParsing="false" text=" Ai">
+          <Menu mnemonicParsing="false" text="Options">
             <items>
-                  <MenuItem fx:id="learnAI" mnemonicParsing="false" onAction="#learnAi" text="Learn" />
+                  <MenuItem fx:id="learnAI" mnemonicParsing="false" onAction="#learnAi" text="AI Time" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

@@ -7,13 +7,13 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import pl.lodz.uni.math.kslodowicz.amazons.dao.helper.SaveGameRowMapper;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.SaveGameDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.utils.StringUtils;
 
-@Component
+@Repository
 public class SaveGameDao extends JdbcDaoSupport {
 
     private static final String CREATE_SAVE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS TBL_SAVE (ID BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL, NAME VARCHAR(255) UNIQUE, ACTUAL_PLAYER INT, PHASE INT,SELECTED VARCHAR(10), AI_PLAYER INT, AI_DIFFICULTY INT, BOARD_STATE VARCHAR(255), TEXT CLOB)";
@@ -23,7 +23,7 @@ public class SaveGameDao extends JdbcDaoSupport {
     private static final String DELETE_SAVE_SQL = "DELETE FROM TBL_SAVE WHERE NAME LIKE ?;";
     private static final String SELECT_COUNT_SAVE_SQL = "SELECT COUNT(*) FROM TBL_SAVE WHERE NAME LIKE ?;";
 
-    private final SaveGameRowMapper saveGameRowMapper = new SaveGameRowMapper();;
+    private final SaveGameRowMapper saveGameRowMapper = new SaveGameRowMapper();
 
     @Autowired
     public SaveGameDao(DataSource dataSource) {

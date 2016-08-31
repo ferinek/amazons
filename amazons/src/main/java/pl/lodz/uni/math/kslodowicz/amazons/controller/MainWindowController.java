@@ -15,16 +15,23 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import pl.lodz.uni.math.kslodowicz.amazons.dto.TileDTO;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.GameType;
 import pl.lodz.uni.math.kslodowicz.amazons.enums.OpponentType;
 import pl.lodz.uni.math.kslodowicz.amazons.helper.OrderedImageView;
 import pl.lodz.uni.math.kslodowicz.amazons.service.GameService;
+import pl.lodz.uni.math.kslodowicz.amazons.service.OptionsService;
 import pl.lodz.uni.math.kslodowicz.amazons.start.AmazonsApplication;
 import pl.lodz.uni.math.kslodowicz.amazons.utils.ArrayUtils;
 import pl.lodz.uni.math.kslodowicz.amazons.utils.StringUtils;
@@ -41,7 +48,8 @@ public class MainWindowController implements EventHandler<MouseEvent> {
     private GameService game;
     @Autowired
     private AmazonsApplication main;
-
+    @Autowired
+    private OptionsService optionService;
     @Autowired
     private SaveGameController saveGameController;
 
@@ -50,7 +58,9 @@ public class MainWindowController implements EventHandler<MouseEvent> {
     private OrderedImageView[][] imageTiles;
     private BorderPane rootLayout;
     private TextArea textArea;
-
+    private ImageView actualPlayerImage;
+    private VBox rightPanel;
+    private Text actualPlayer;
     public MainWindowController() {
         String[] names = { "/images/empty.png", "/images/first.png", "/images/second.png", "/images/removed.png", "/images/move.png" };
         images = new Image[names.length];
@@ -126,10 +136,9 @@ public class MainWindowController implements EventHandler<MouseEvent> {
     private void initializeTextArea() {
 
         textArea = new TextArea();
-
         textArea.setEditable(false);
         textArea.setStyle("-fx-focus-color: transparent;");
-
+        textArea.setFont(Font.font("Tahoma", 16));
     }
 
     public void updateBoard(int[][] c, List<TileDTO> moves) {
@@ -149,9 +158,7 @@ public class MainWindowController implements EventHandler<MouseEvent> {
 
     // Temporary unimplemented
     public void learnAi() {
-        if (mainHBox != null && mainHBox.getChildren().contains(textArea)) {
-            setText(getText() + "Ai not yet implemented.\n");
-        }
+        optionService.ChangeMonteCarloTime();
     }
 
     @Override
@@ -168,6 +175,13 @@ public class MainWindowController implements EventHandler<MouseEvent> {
             updateBoard(ArrayUtils.copyTable(getGame().getFields()), getGame().getMoves());
             getGame().setChange(false);
         }
+        updateActualPlayer();
+    }
+
+    private void updateActualPlayer() {
+        actualPlayer.setText(String.format("Actual Player: (%s) ", game.getAiType()));
+        actualPlayerImage.setImage(images[game.getPlayer()]);
+
     }
 
     public GameService getGame() {
@@ -207,8 +221,8 @@ public class MainWindowController implements EventHandler<MouseEvent> {
             mainHBox.getChildren().remove(pane);
 
         }
-        if (mainHBox.getChildren().contains(textArea)) {
-            mainHBox.getChildren().remove(textArea);
+        if (mainHBox.getChildren().contains(rightPanel)) {
+            mainHBox.getChildren().remove(rightPanel);
 
         }
 
@@ -235,7 +249,37 @@ public class MainWindowController implements EventHandler<MouseEvent> {
         initializeLabels(size);
         initializeTextArea();
         mainHBox.getChildren().addAll(pane);
-        mainHBox.getChildren().addAll(textArea);
+        VBox rightPanel = initializeRightPanel();
+        mainHBox.getChildren().addAll(rightPanel);
+    }
+
+    private VBox initializeRightPanel() {
+        rightPanel = new VBox();
+        initializeTextArea();
+
+        Pane indicator = initializeIndicator();
+        VBox.setVgrow(textArea, Priority.ALWAYS);
+        rightPanel.getChildren().addAll(indicator);
+        rightPanel.getChildren().addAll(textArea);
+        return rightPanel;
+    }
+
+    private Pane initializeIndicator() {
+        GridPane pane = new GridPane();
+        actualPlayer = new Text();
+        actualPlayer.setText(String.format("Actual Player: (%s) ", game.getAiType()));
+        actualPlayer.setFont(Font.font("Tahoma", FontWeight.BOLD, 22));
+        actualPlayerImage = new ImageView(images[1]);
+        actualPlayerImage.setPreserveRatio(true);
+        actualPlayerImage.setFitHeight(50);
+        pane.add(actualPlayer, 1, 1);
+        pane.add(actualPlayerImage, 2, 1);
+        
+        pane.setStyle("-fx-padding: 10 0 10 0;");
+        
+        GridPane.setHalignment(actualPlayerImage, HPos.RIGHT);
+        // actualPlayerImage.setAlignment(Pos.BASELINE_RIGHT);
+        return pane;
     }
 
 }
